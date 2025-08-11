@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Architect's Journey</title>
+    <!-- Tailwind CSS CDN for easy styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter and Press Start 2P Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        /* Base styles from the app's theme */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            overflow: hidden;
+        }
+
+        /* Container styling to match the app */
+        .poster-container {
+            width: 100%;
+            max-width: 1400px; /* Increased max-width for more space */
+            background-color: rgba(18, 25, 33, 0.9);
+            border-radius: 2rem;
+            box-shadow: 0 0 30px rgba(100, 255, 218, 0.2);
+            padding: 3rem; /* Increased padding */
+            text-align: center;
+            position: relative;
+            min-height: 800px; /* Increased min-height */
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: box-shadow 0.3s ease-in-out;
+            /* Scanline effect for a retro-futuristic feel */
+            background-image: linear-gradient(0deg, transparent 24%, rgba(100, 255, 218, 0.05) 25%, rgba(100, 255, 218, 0.05) 26%, transparent 27%, transparent 74%, rgba(100, 255, 218, 0.05) 75%, rgba(100, 255, 218, 0.05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(100, 255, 218, 0.05) 25%, rgba(100, 255, 218, 0.05) 26%, transparent 27%, transparent 74%, rgba(100, 255, 218, 0.05) 75%, rgba(100, 255, 218, 0.05) 76%, transparent 77%, transparent);
+            background-size: 50px 50px;
+            animation: scanline 10s linear infinite;
+        }
+        @keyframes scanline {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 500px; }
+        }
+
+        /* Styles for the main title */
+        .main-title {
+            font-family: 'Press Start 2P', cursive;
+            color: #64ffda;
+            text-shadow: 0 0 10px rgba(100, 255, 218, 0.8);
+            animation: neon-flicker 1.5s infinite alternate;
+        }
+        @keyframes neon-flicker {
+            0% { opacity: 1; text-shadow: 0 0 5px #64ffda; }
+            50% { opacity: 0.8; text-shadow: 0 0 10px #64ffda; }
+            100% { opacity: 1; text-shadow: 0 0 5px #64ffda; }
+        }
+
+        /* Scene transition styles */
+        .scene {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.95);
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+            padding: 2.5rem;
+        }
+        .scene.active {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* Card styling to match the app's theme */
+        .poster-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 0 10px rgba(100, 255, 218, 0.4), inset 0 0 5px rgba(100, 255, 218, 0.2);
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 12rem;
+        }
+        .poster-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(100, 255, 218, 0.8);
+        }
+        
+        .card-title {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #64ffda;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-text {
+            font-size: 0.9em;
+            line-height: 1.4;
+            color: #e0e7ff;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            font-weight: 500;
+        }
+        
+        /* New glow effects and colours for the subheadings */
+        .text-glow-blue {
+            color: #38bdf8;
+            text-shadow: 0 0 5px #38bdf8;
+        }
+
+        .text-glow-purple {
+            color: #c084fc;
+            text-shadow: 0 0 5px #c084fc;
+        }
+
+        .text-glow-green {
+            color: #4ade80;
+            text-shadow: 0 0 5px #4ade80;
+        }
+        
+        .text-amber-400 {
+            color: #fbbf24;
+            text-shadow: 0 0 5px #fbbf24;
+        }
+
+        /* Main year titles will have a white text color with a colored glow */
+        .glow-amber {
+            text-shadow: 0 0 5px #fbbf24;
+        }
+        .glow-purple {
+            text-shadow: 0 0 5px #c084fc;
+        }
+        .glow-green {
+            text-shadow: 0 0 5px #4ade80;
+        }
+
+        /* Consistent height for all section headings to prevent layout shifts */
+        .section-heading {
+            min-height: 4rem; /* Ensures consistent vertical space for two lines of text */
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .poster-container {
+                min-height: auto;
+                height: auto;
+                padding: 1.5rem;
+            }
+            .main-title {
+                font-size: 1.5em;
+            }
+            .scene h2 {
+                /* Reduced font size slightly to prevent wrapping on tablet views */
+                font-size: 1.75rem;
+            }
+            .scene h3 {
+                font-size: 1.5rem;
+            }
+            /* Adjusted min-height for cards on smaller screens for better fit */
+            .poster-card {
+                min-height: 10rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="poster-container">
+        <!-- Scene 1: Year One Section -->
+        <div id="scene-1" class="scene">
+            <h1 class="main-title text-3xl sm:text-5xl font-extrabold mb-8">
+                The Digital Architect's<br>Journey
+            </h1>
+            <h2 class="text-3xl sm:text-4xl font-bold text-gray-200 mb-8 glow-amber">Year One: The Digital Awakening</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 w-full">
+                <!-- Me and My Digital Life Section -->
+                <div class="flex flex-col">
+                    <h3 class="text-2xl font-bold text-amber-400 mb-4 section-heading">Me and My Digital Life</h3>
+                    <div class="space-y-4 flex-grow">
+                        <div class="poster-card border-amber-400">
+                            <h4 class="card-title">What are the building blocks of my Digital Life?</h4>
+                            <p class="card-text">Foundations of Information Systems</p>
+                        </div>
+                        <div class="poster-card border-amber-400">
+                            <h4 class="card-title">What is the technology that underpins my Digital Life?</h4>
+                            <p class="card-text">IT Infrastructure</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Programming with AI Section -->
+                <div class="flex flex-col">
+                    <h3 class="text-2xl font-bold text-glow-purple mb-4 section-heading">Programming with AI</h3>
+                    <div class="space-y-4 flex-grow">
+                        <div class="poster-card border-purple-400">
+                            <h4 class="card-title">How do I build and use AI tools? (Dummy)</h4>
+                            <p class="card-text">Dummy: Applied AI Development</p>
+                        </div>
+                        <div class="poster-card border-purple-400">
+                            <h4 class="card-title">What are the consequences of my Digital Behaviour?</h4>
+                            <p class="card-text">Ethics, Use and Implications for Society</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Organising my Digital Life Section -->
+                <div class="flex flex-col">
+                    <h3 class="text-2xl font-bold text-glow-green mb-4 section-heading">Organising My Digital Life</h3>
+                    <div class="space-y-4 flex-grow">
+                        <div class="poster-card border-green-400">
+                            <h4 class="card-title">How do I organise my Digital Life?</h4>
+                            <p class="card-text">Data/Information Management</p>
+                        </div>
+                        <div class="poster-card border-green-400">
+                            <h4 class="card-title">Do my Digital Habits matter?</h4>
+                            <p class="card-text">Data / Business Analytics and Data / Information Visualisation</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scene 2: Year Two Section -->
+        <div id="scene-2" class="scene">
+             <h1 class="main-title text-3xl sm:text-5xl font-extrabold mb-8">
+                The Digital Architect's<br>Journey
+            </h1>
+            <h2 class="text-3xl sm:text-4xl font-bold text-gray-200 mb-8 glow-purple">Year Two: The Digital Business Frontier</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+                <!-- Me and My Digital Work Life Section -->
+                <div class="flex flex-col">
+                    <h3 class="text-2xl font-bold text-amber-400 mb-4 section-heading">Me and My Digital Work Life</h3>
+                    <div class="space-y-4 flex-grow">
+                        <div class="poster-card border-amber-400">
+                            <h4 class="card-title">How do I build the digital foundations of a business?</h4>
+                            <p class="card-text">Enterprise Systems Architecture</p>
+                        </div>
+                        <div class="poster-card border-amber-400">
+                            <h4 class="card-title">How does the technology I use at work underpin business success?</h4>
+                            <p class="card-text">IT Infrastructure Management</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Building Solutions with AI Section -->
+                <div class="flex flex-col">
+                    <h3 class="text-2xl font-bold text-glow-purple mb-4 section-heading">Building Solutions with AI</h3>
+                    <div class="space-y-4 flex-grow">
+                        <div class="poster-card border-purple-400">
+                            <h4 class="card-title">How can I use AI to build solutions for business?</h4>
+                            <p class="card-text">Applied AI Development</p>
+                        </div>
+                        <div class="poster-card border-purple-400">
+                            <h4 class="card-title">What are the business consequences of digital behaviour?</h4>
+                            <p class="card-text">Ethical AI and Business Impact</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Organising Business Information Section -->
+                <div class="flex flex-col">
+                    <h3 class="text-2xl font-bold text-glow-green mb-4 section-heading">Shaping Business Information</h3>
+                    <div class="space-y-4 flex-grow">
+                        <div class="poster-card border-green-400">
+                            <h4 class="card-title">How do I manage, secure, and analyze business data?</h4>
+                            <p class="card-text">Business Data Management & Analytics</p>
+                        </div>
+                        <div class="poster-card border-green-400">
+                            <h4 class="card-title">How do a business's digital habits impact its success?</h4>
+                            <p class="card-text">Data-Driven Business Decisions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scene 3: Year Three Section -->
+        <div id="scene-3" class="scene">
+             <h1 class="main-title text-3xl sm:text-5xl font-extrabold mb-8">
+                The Digital Architect's<br>Journey
+            </h1>
+            <h2 class="text-3xl sm:text-4xl font-bold text-gray-200 mb-8 glow-green">Year Three: The Public's Digital Architect</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+                <!-- Me in the Community Section -->
+                <div class="flex flex-col">
+                    <h3 class="text-2xl font-bold text-amber-400 mb-4 section-heading">Me and My Digital Community</h3>
+                    <div class="space-y-4 flex-grow">
+                        <div class="poster-card border-amber-400">
+                            <h4 class="card-title">How can my digital actions create positive social change?</h4>
+                            <p class="card-text">Digital Citizenship and Social Impact</p>
+                        </div>
+                        <div class="poster-card border-amber-400">
+                            <h4 class="card-title">How do I collaborate in a digital world? (Dummy)</h4>
+                            <p class="card-text">Dummy: Online Communities and Collaboration</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Building Solutions with AI Section -->
+                <div class="flex flex-col">
+                    <h3 class="text-2xl font-bold text-glow-purple mb-4 section-heading">Building Solutions for Society</h3>
+                    <div class="space-y-4 flex-grow">
+                        <div class="poster-card border-purple-400">
+                            <h4 class="card-title">How do I use technology to solve global and societal challenges?</h4>
+                            <p class="card-text">Digital Transformation for Social Impact</p>
+                        </div>
+                        <div class="poster-card border-purple-400">
+                            <h4 class="card-title">How does technology affect public policy? (Dummy)</h4>
+                            <p class="card-text">Dummy: Technology and Governance</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Organising Information for the Public Good Section -->
+                <div class="flex flex-col">
+                    <h3 class="text-2xl font-bold text-glow-green mb-4 section-heading">Organising Information for the Public Good</h3>
+                    <div class="space-y-4 flex-grow">
+                        <div class="poster-card border-green-400">
+                            <h4 class="card-title">How do I use data to inform public policy and support communities?</h4>
+                            <p class="card-text">Data Ethics and Governance</p>
+                        </div>
+                        <div class="poster-card border-green-400">
+                            <h4 class="card-title">How do I ensure data is used ethically? (Dummy)</h4>
+                            <p class="card-text">Dummy: Data Privacy and Security</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get all scene elements
+            const scenes = [
+                document.getElementById('scene-1'),
+                document.getElementById('scene-2'),
+                document.getElementById('scene-3')
+            ];
+            let currentSceneIndex = 0;
+            const cycleDuration = 10000; // 10 seconds per scene
+
+            /**
+             * Hides all scenes and shows the one at the specified index.
+             * @param {number} index The index of the scene to show.
+             */
+            function showScene(index) {
+                // Remove the 'active' class from all scenes
+                scenes.forEach(scene => scene.classList.remove('active'));
+                // Add the 'active' class to the target scene
+                scenes[index].classList.add('active');
+            }
+
+            /**
+             * Cycles through the scenes indefinitely with a delay.
+             */
+            function cycleScenes() {
+                // Show the current scene
+                showScene(currentSceneIndex);
+
+                // Set a timer to move to the next scene
+                setTimeout(() => {
+                    currentSceneIndex++;
+                    // Loop back to the start if we've reached the end
+                    if (currentSceneIndex >= scenes.length) {
+                        currentSceneIndex = 0;
+                    }
+                    cycleScenes(); // Call the function recursively to continue the loop
+                }, cycleDuration);
+            }
+
+            // Start the cycle when the page loads
+            cycleScenes();
+        });
+    </script>
+</body>
+</html>
