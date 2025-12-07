@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Architect's Journey</title>
-    <!-- Tailwind CSS CDN for easy styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Inter and Press Start 2P Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
         /* Base styles from the app's theme */
@@ -74,10 +72,12 @@
             transform: translate(-50%, -50%) scale(0.95);
             transition: opacity 1s ease-in-out, transform 1s ease-in-out;
             padding: 2.5rem;
+            pointer-events: none; /* Make invisible scenes non-interactive */
         }
         .scene.active {
             opacity: 1;
             transform: translate(-50%, -50%) scale(1);
+            pointer-events: auto; /* Make the active scene interactive */
         }
 
         /* Card styling to match the app's theme */
@@ -179,17 +179,14 @@
 <body>
 
     <div class="poster-container">
-        <!-- Scene 1: Year One Section -->
         <div id="scene-1" class="scene">
             <h1 class="main-title text-3xl sm:text-5xl font-extrabold mb-8">
                 The Digital Architect's<br>Journey
             </h1>
             <h2 class="text-3xl sm:text-4xl font-bold text-gray-200 mb-8 glow-amber">Year One: The Digital Awakening</h2>
-            <!-- The container below is now identical to the other scenes -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
-                <!-- Me and My Digital Life Section -->
                 <div class="flex flex-col">
-                    <h3 class="text-3xl font-bold text-amber-400 mb-4 section-heading">Me and My Digital Life</h3>
+                    <h3 class="text-3xl font-bold text-amber-400 mb-4 section-heading">Me and My<br>Digital Life</h3>
                     <div class="space-y-4 flex-grow">
                         <div class="poster-card border-amber-400">
                             <h4 class="card-title">What are the building blocks of my Digital Life?</h4>
@@ -200,9 +197,8 @@
                     </div>
                 </div>
 
-                <!-- Programming with AI Section -->
                 <div class="flex flex-col">
-                    <h3 class="text-3xl font-bold text-glow-purple mb-4 section-heading">Programming with AI</h3>
+                    <h3 class="text-3xl font-bold text-glow-purple mb-4 section-heading">Programming<br>with AI</h3>
                     <div class="space-y-4 flex-grow">
                         <div class="poster-card border-purple-400">
                             <h4 class="card-title">How Do I Build My Own Digital Creations?</h4>
@@ -213,9 +209,8 @@
                     </div>
                 </div>
 
-                <!-- Organising my Digital Life Section -->
                 <div class="flex flex-col">
-                    <h3 class="text-3xl font-bold text-glow-green mb-4 section-heading">Organising My Digital Life</h3>
+                    <h3 class="text-3xl font-bold text-glow-green mb-4 section-heading">Organising My<br>Digital Life</h3>
                     <div class="space-y-4 flex-grow">
                         <div class="poster-card border-green-400">
                             <h4 class="card-title">How do I organise my Digital Life?</h4>
@@ -228,16 +223,14 @@
             </div>
         </div>
 
-        <!-- Scene 2: Year Two Section -->
         <div id="scene-2" class="scene">
-                 <h1 class="main-title text-3xl sm:text-5xl font-extrabold mb-8">
-                    The Digital Architect's<br>Journey
-                </h1>
+             <h1 class="main-title text-3xl sm:text-5xl font-extrabold mb-8">
+                 The Digital Architect's<br>Journey
+             </h1>
             <h2 class="text-3xl sm:text-4xl font-bold text-gray-200 mb-8 glow-purple">Year Two: The Digital Business Frontier</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
-                <!-- Me and My Digital Work Life Section -->
                 <div class="flex flex-col">
-                    <h3 class="text-3xl font-bold text-amber-400 mb-4 section-heading">Me and My Digital Work Life</h3>
+                    <h3 class="text-3xl font-bold text-amber-400 mb-4 section-heading">Me and My<br>Digital Work Life</h3>
                     <div class="space-y-4 flex-grow">
                         <div class="poster-card border-amber-400">
                             <h4 class="card-title">How do I build the digital foundations of a business?</h4>
@@ -248,9 +241,8 @@
                     </div>
                 </div>
 
-                <!-- Building Solutions with AI Section -->
                 <div class="flex flex-col">
-                    <h3 class="text-3xl font-bold text-glow-purple mb-4 section-heading">Building Solutions with AI</h3>
+                    <h3 class="text-3xl font-bold text-glow-purple mb-4 section-heading">Building Solutions<br>with AI</h3>
                     <div class="space-y-4 flex-grow">
                         <div class="poster-card border-purple-400">
                             <h4 class="card-title">How can I use AI to build solutions for business?</h4>
@@ -261,9 +253,8 @@
                     </div>
                 </div>
 
-                <!-- Organising Business Information Section -->
                 <div class="flex flex-col">
-                    <h3 class="text-3xl font-bold text-glow-green mb-4 section-heading">Shaping Business Information</h3>
+                    <h3 class="text-3xl font-bold text-glow-green mb-4 section-heading">Shaping Business<br>Information</h3>
                     <div class="space-y-4 flex-grow">
                         <div class="poster-card border-green-400">
                             <h4 class="card-title">How do I manage, secure, and analyse business data?</h4>
@@ -276,16 +267,14 @@
             </div>
         </div>
 
-        <!-- Scene 3: Year Three Section -->
         <div id="scene-3" class="scene">
-                 <h1 class="main-title text-3xl sm:text-5xl font-extrabold mb-8">
-                    The Digital Architect's<br>Journey
-                </h1>
+             <h1 class="main-title text-3xl sm:text-5xl font-extrabold mb-8">
+                 The Digital Architect's<br>Journey
+             </h1>
             <h2 class="text-3xl sm:text-4xl font-bold text-gray-200 mb-8 glow-green">Year Three: The Public's Digital Architect</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
-                <!-- Me in the Community Section -->
                 <div class="flex flex-col">
-                    <h3 class="text-3xl font-bold text-amber-400 mb-4 section-heading">Me and My Digital Community</h3>
+                    <h3 class="text-3xl font-bold text-amber-400 mb-4 section-heading">Me and My<br>Digital Community</h3>
                     <div class="space-y-4 flex-grow">
                         <div class="poster-card border-amber-400">
                             <h4 class="card-title">How can my digital actions create positive social change?</h4>
@@ -296,9 +285,8 @@
                     </div>
                 </div>
 
-                <!-- Building Solutions with AI Section -->
                 <div class="flex flex-col">
-                    <h3 class="text-3xl font-bold text-glow-purple mb-4 section-heading">Building Solutions for Society</h3>
+                    <h3 class="text-3xl font-bold text-glow-purple mb-4 section-heading">Building Solutions<br>for Society</h3>
                     <div class="space-y-4 flex-grow">
                         <div class="poster-card border-purple-400">
                             <h4 class="card-title"> How do I use technology to build solutions for society?</h4>
@@ -309,9 +297,8 @@
                     </div>
                 </div>
 
-                <!-- Organising Information for the Public Good Section -->
                 <div class="flex flex-col">
-                    <h3 class="text-3xl font-bold text-glow-green mb-4 section-heading">Organising Information for the Public Good</h3>
+                    <h3 class="text-3xl font-bold text-glow-green mb-4 section-heading">Organising Information<br>for the Public Good</h3>
                     <div class="space-y-4 flex-grow">
                         <div class="poster-card border-green-400">
                             <h4 class="card-title">How do I use data to inform public policy and support communities?</h4>
@@ -335,7 +322,7 @@
                 document.getElementById('scene-3')
             ];
             let currentSceneIndex = 0;
-            const cycleDuration = 20000; // 10 seconds per scene
+            const cycleDuration = 20000; // 20 seconds per scene
 
             /**
              * Hides all scenes and shows the one at the specified index.
